@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Production builds
+dist/
+build/
+
+# Heavy AI Model Files (Model weights are hosted on Hugging Face: harry2708/disaster-bert)
+models/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.onnx
+
+# Datasets & Heavy CSVs
+data/
+raw_datasets/
+*.csv
+*.jsonl
+
+# Python cache & virtual environments
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# IDE & OS temporary files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+
+# Environment variables
+.env
+.env.local
