@@ -56,75 +56,84 @@ num_classes = 0
 
 # Comprehensive Indian Geographical Database for NER & Geocoding
 INDIAN_LOCATIONS = {
-    # Specific Districts & Cities (Checked First for Exact Geocoding)
-    "assam": {"name": "Assam", "state": "Assam", "district": "Guwahati", "lat": 26.2006, "lng": 92.9376},
-    "guwahati": {"name": "Guwahati, Assam", "state": "Assam", "district": "Kamrup Metropolitan", "lat": 26.1445, "lng": 91.7362},
-    "silchar": {"name": "Silchar, Assam", "state": "Assam", "district": "Cachar", "lat": 24.8333, "lng": 92.7789},
-    "dibrugarh": {"name": "Dibrugarh, Assam", "state": "Assam", "district": "Dibrugarh", "lat": 27.4728, "lng": 94.9120},
-    "jorhat": {"name": "Jorhat, Assam", "state": "Assam", "district": "Jorhat", "lat": 26.7509, "lng": 94.2037},
-    "barpeta": {"name": "Barpeta, Assam", "state": "Assam", "district": "Barpeta", "lat": 26.3200, "lng": 91.0000},
-    "brahmaputra": {"name": "Brahmaputra Valley, Assam", "state": "Assam", "district": "Kamrup", "lat": 26.1800, "lng": 91.7500},
-    "lakhimpur": {"name": "Lakhimpur, Assam", "state": "Assam", "district": "Lakhimpur", "lat": 27.2300, "lng": 94.1000},
-
+    # All 28 States & 8 Union Territories
+    "andhra pradesh": {"name": "Andhra Pradesh", "state": "Andhra Pradesh", "district": "Amaravati", "lat": 15.9129, "lng": 79.7400},
+    "arunachal pradesh": {"name": "Arunachal Pradesh", "state": "Arunachal Pradesh", "district": "Papum Pare", "lat": 28.2180, "lng": 94.7278},
+    "assam": {"name": "Assam", "state": "Assam", "district": "Kamrup", "lat": 26.2006, "lng": 92.9376},
+    "bihar": {"name": "Bihar", "state": "Bihar", "district": "Patna", "lat": 25.0961, "lng": 85.3131},
+    "chhattisgarh": {"name": "Chhattisgarh", "state": "Chhattisgarh", "district": "Raipur", "lat": 21.2787, "lng": 81.8661},
+    "goa": {"name": "Goa", "state": "Goa", "district": "North Goa", "lat": 15.2993, "lng": 74.1240},
+    "gujarat": {"name": "Gujarat", "state": "Gujarat", "district": "Gandhinagar", "lat": 22.2587, "lng": 71.1924},
+    "haryana": {"name": "Haryana", "state": "Haryana", "district": "Chandigarh", "lat": 29.0588, "lng": 76.0856},
+    "himachal pradesh": {"name": "Himachal Pradesh", "state": "Himachal Pradesh", "district": "Shimla", "lat": 31.1048, "lng": 77.1734},
+    "himachal": {"name": "Himachal Pradesh", "state": "Himachal Pradesh", "district": "Shimla", "lat": 31.1048, "lng": 77.1734},
+    "jharkhand": {"name": "Jharkhand", "state": "Jharkhand", "district": "Ranchi", "lat": 23.6102, "lng": 85.2799},
+    "karnataka": {"name": "Karnataka", "state": "Karnataka", "district": "Bengaluru", "lat": 15.3173, "lng": 75.7139},
     "kerala": {"name": "Kerala", "state": "Kerala", "district": "Thiruvananthapuram", "lat": 10.8505, "lng": 76.2711},
-    "wayanad": {"name": "Wayanad, Kerala", "state": "Kerala", "district": "Wayanad", "lat": 11.6854, "lng": 76.1320},
-    "munnar": {"name": "Munnar, Kerala", "state": "Kerala", "district": "Idukki", "lat": 10.0889, "lng": 77.0595},
-    "kochi": {"name": "Kochi, Kerala", "state": "Kerala", "district": "Ernakulam", "lat": 9.9312, "lng": 76.2673},
-
+    "madhya pradesh": {"name": "Madhya Pradesh", "state": "Madhya Pradesh", "district": "Bhopal", "lat": 22.9734, "lng": 78.6569},
+    "maharashtra": {"name": "Maharashtra", "state": "Maharashtra", "district": "Mumbai City", "lat": 19.7515, "lng": 75.7139},
+    "manipur": {"name": "Manipur", "state": "Manipur", "district": "Imphal West", "lat": 24.6637, "lng": 93.9063},
+    "meghalaya": {"name": "Meghalaya", "state": "Meghalaya", "district": "East Khasi Hills", "lat": 25.4670, "lng": 91.3662},
+    "mizoram": {"name": "Mizoram", "state": "Mizoram", "district": "Aizawl", "lat": 23.1645, "lng": 92.9376},
+    "nagaland": {"name": "Nagaland", "state": "Nagaland", "district": "Kohima", "lat": 26.1584, "lng": 94.5624},
+    "odisha": {"name": "Odisha", "state": "Odisha", "district": "Khurda", "lat": 20.9517, "lng": 85.0985},
+    "punjab": {"name": "Punjab", "state": "Punjab", "district": "Ludhiana", "lat": 31.1471, "lng": 75.3412},
+    "rajasthan": {"name": "Rajasthan", "state": "Rajasthan", "district": "Jaipur", "lat": 27.0238, "lng": 74.2179},
+    "sikkim": {"name": "Sikkim", "state": "Sikkim", "district": "Gangtok", "lat": 27.5330, "lng": 88.5122},
+    "tamil nadu": {"name": "Tamil Nadu", "state": "Tamil Nadu", "district": "Chennai", "lat": 11.1271, "lng": 78.6569},
+    "telangana": {"name": "Telangana", "state": "Telangana", "district": "Hyderabad", "lat": 18.1124, "lng": 79.0193},
+    "tripura": {"name": "Tripura", "state": "Tripura", "district": "West Tripura", "lat": 23.9408, "lng": 91.9882},
+    "uttar pradesh": {"name": "Uttar Pradesh", "state": "Uttar Pradesh", "district": "Lucknow", "lat": 26.8467, "lng": 80.9462},
     "uttarakhand": {"name": "Uttarakhand", "state": "Uttarakhand", "district": "Dehradun", "lat": 30.0668, "lng": 79.0193},
+    "west bengal": {"name": "West Bengal", "state": "West Bengal", "district": "Kolkata", "lat": 22.9868, "lng": 87.8550},
+    "delhi": {"name": "Delhi NCR", "state": "Delhi", "district": "Central Delhi", "lat": 28.6139, "lng": 77.2090},
+    "new delhi": {"name": "New Delhi", "state": "Delhi", "district": "New Delhi", "lat": 28.6139, "lng": 77.2090},
+    "jammu and kashmir": {"name": "Jammu & Kashmir", "state": "Jammu & Kashmir", "district": "Srinagar", "lat": 33.7782, "lng": 76.5762},
+    "jammu & kashmir": {"name": "Jammu & Kashmir", "state": "Jammu & Kashmir", "district": "Srinagar", "lat": 33.7782, "lng": 76.5762},
+    "kashmir": {"name": "Kashmir Valley", "state": "Jammu & Kashmir", "district": "Srinagar", "lat": 34.0837, "lng": 74.7973},
+    "ladakh": {"name": "Ladakh", "state": "Ladakh", "district": "Leh", "lat": 34.1526, "lng": 77.5771},
+    "chandigarh": {"name": "Chandigarh", "state": "Chandigarh", "district": "Chandigarh", "lat": 30.7333, "lng": 76.7794},
+
+    # Specific Hotspots, Cities & Districts
+    "wayanad": {"name": "Wayanad, Kerala", "state": "Kerala", "district": "Wayanad", "lat": 11.6854, "lng": 76.1320},
     "chamoli": {"name": "Chamoli, Uttarakhand", "state": "Uttarakhand", "district": "Chamoli", "lat": 30.4048, "lng": 79.3284},
     "joshimath": {"name": "Joshimath, Uttarakhand", "state": "Uttarakhand", "district": "Chamoli", "lat": 30.5564, "lng": 79.5647},
     "kedarnath": {"name": "Kedarnath, Uttarakhand", "state": "Uttarakhand", "district": "Rudraprayag", "lat": 30.7346, "lng": 79.0669},
-    "badrinath": {"name": "Badrinath, Uttarakhand", "state": "Uttarakhand", "district": "Chamoli", "lat": 30.7433, "lng": 79.4938},
-    "dehradun": {"name": "Dehradun, Uttarakhand", "state": "Uttarakhand", "district": "Dehradun", "lat": 30.3165, "lng": 78.0322},
-
-    "himachal pradesh": {"name": "Himachal Pradesh", "state": "Himachal Pradesh", "district": "Shimla", "lat": 31.1048, "lng": 77.1734},
-    "himachal": {"name": "Himachal Pradesh", "state": "Himachal Pradesh", "district": "Shimla", "lat": 31.1048, "lng": 77.1734},
     "shimla": {"name": "Shimla, Himachal Pradesh", "state": "Himachal Pradesh", "district": "Shimla", "lat": 31.1048, "lng": 77.1734},
     "manali": {"name": "Manali, Himachal Pradesh", "state": "Himachal Pradesh", "district": "Kullu", "lat": 32.2432, "lng": 77.1892},
     "kullu": {"name": "Kullu, Himachal Pradesh", "state": "Himachal Pradesh", "district": "Kullu", "lat": 31.9579, "lng": 77.1095},
-    "dharamshala": {"name": "Dharamshala, Himachal Pradesh", "state": "Himachal Pradesh", "district": "Kangra", "lat": 32.2190, "lng": 76.3234},
-
-    "gujarat": {"name": "Gujarat", "state": "Gujarat", "district": "Ahmedabad", "lat": 22.2587, "lng": 71.1924},
-    "kutch": {"name": "Kutch, Gujarat", "state": "Gujarat", "district": "Kutch", "lat": 23.2420, "lng": 69.6669},
-    "ahmedabad": {"name": "Ahmedabad, Gujarat", "state": "Gujarat", "district": "Ahmedabad", "lat": 23.0225, "lng": 72.5714},
-
-    "odisha": {"name": "Odisha", "state": "Odisha", "district": "Bhubaneswar", "lat": 20.9517, "lng": 85.0985},
-    "puri": {"name": "Puri, Odisha", "state": "Odisha", "district": "Puri", "lat": 19.8135, "lng": 85.8312},
-    "bhubaneswar": {"name": "Bhubaneswar, Odisha", "state": "Odisha", "district": "Khurda", "lat": 20.2961, "lng": 85.8245},
-
-    "bihar": {"name": "Bihar", "state": "Bihar", "district": "Patna", "lat": 25.0961, "lng": 85.3131},
-    "patna": {"name": "Patna, Bihar", "state": "Bihar", "district": "Patna", "lat": 25.5941, "lng": 85.1376},
-    "darbhanga": {"name": "Darbhanga, Bihar", "state": "Bihar", "district": "Darbhanga", "lat": 26.1542, "lng": 85.8918},
-
-    "west bengal": {"name": "West Bengal", "state": "West Bengal", "district": "Kolkata", "lat": 22.9868, "lng": 87.8550},
-    "kolkata": {"name": "Kolkata, West Bengal", "state": "West Bengal", "district": "Kolkata", "lat": 22.5726, "lng": 88.3639},
-    "darjeeling": {"name": "Darjeeling, West Bengal", "state": "West Bengal", "district": "Darjeeling", "lat": 27.0410, "lng": 88.2663},
-    "teesta": {"name": "Teesta River Region, North Bengal", "state": "West Bengal", "district": "Kalimpong", "lat": 27.0600, "lng": 88.4700},
-
-    "tamil nadu": {"name": "Tamil Nadu", "state": "Tamil Nadu", "district": "Chennai", "lat": 11.1271, "lng": 78.6569},
-    "chennai": {"name": "Chennai, Tamil Nadu", "state": "Tamil Nadu", "district": "Chennai", "lat": 13.0827, "lng": 80.2707},
-
-    "maharashtra": {"name": "Maharashtra", "state": "Maharashtra", "district": "Mumbai", "lat": 19.7515, "lng": 75.7139},
+    "guwahati": {"name": "Guwahati, Assam", "state": "Assam", "district": "Kamrup", "lat": 26.1445, "lng": 91.7362},
+    "kaziranga": {"name": "Kaziranga, Assam", "state": "Assam", "district": "Golaghat", "lat": 26.5775, "lng": 93.1711},
     "mumbai": {"name": "Mumbai, Maharashtra", "state": "Maharashtra", "district": "Mumbai City", "lat": 19.0760, "lng": 72.8777},
     "pune": {"name": "Pune, Maharashtra", "state": "Maharashtra", "district": "Pune", "lat": 18.5204, "lng": 73.8567},
-
-    "jammu and kashmir": {"name": "Jammu & Kashmir", "state": "Jammu & Kashmir", "district": "Srinagar", "lat": 33.7782, "lng": 76.5762},
-    "jammu": {"name": "Jammu, J&K", "state": "Jammu & Kashmir", "district": "Jammu", "lat": 32.7266, "lng": 74.8570},
-    "srinagar": {"name": "Srinagar, J&K", "state": "Jammu & Kashmir", "district": "Srinagar", "lat": 34.0837, "lng": 74.7973},
-    "kashmir": {"name": "Kashmir Valley, J&K", "state": "Jammu & Kashmir", "district": "Srinagar", "lat": 34.0837, "lng": 74.7973},
-
-    "delhi": {"name": "Delhi NCR", "state": "Delhi", "district": "Central Delhi", "lat": 28.6139, "lng": 77.2090},
-    "yamuna": {"name": "Yamuna River Banks, Delhi", "state": "Delhi", "district": "East Delhi", "lat": 28.6500, "lng": 77.2600},
-
-    "uttar pradesh": {"name": "Uttar Pradesh", "state": "Uttar Pradesh", "district": "Lucknow", "lat": 26.8467, "lng": 80.9462},
+    "nagpur": {"name": "Nagpur, Maharashtra", "state": "Maharashtra", "district": "Nagpur", "lat": 21.1458, "lng": 79.0882},
+    "kolkata": {"name": "Kolkata, West Bengal", "state": "West Bengal", "district": "Kolkata", "lat": 22.5726, "lng": 88.3639},
+    "darjeeling": {"name": "Darjeeling, West Bengal", "state": "West Bengal", "district": "Darjeeling", "lat": 27.0410, "lng": 88.2663},
+    "chennai": {"name": "Chennai, Tamil Nadu", "state": "Tamil Nadu", "district": "Chennai", "lat": 13.0827, "lng": 80.2707},
+    "bengaluru": {"name": "Bengaluru, Karnataka", "state": "Karnataka", "district": "Bengaluru Urban", "lat": 12.9716, "lng": 77.5946},
+    "bangalore": {"name": "Bengaluru, Karnataka", "state": "Karnataka", "district": "Bengaluru Urban", "lat": 12.9716, "lng": 77.5946},
+    "hyderabad": {"name": "Hyderabad, Telangana", "state": "Telangana", "district": "Hyderabad", "lat": 17.3850, "lng": 78.4867},
+    "ahmedabad": {"name": "Ahmedabad, Gujarat", "state": "Gujarat", "district": "Ahmedabad", "lat": 23.0225, "lng": 72.5714},
+    "kutch": {"name": "Kutch, Gujarat", "state": "Gujarat", "district": "Kutch", "lat": 23.2420, "lng": 69.6669},
+    "bhubaneswar": {"name": "Bhubaneswar, Odisha", "state": "Odisha", "district": "Khurda", "lat": 20.2961, "lng": 85.8245},
+    "puri": {"name": "Puri Coast, Odisha", "state": "Odisha", "district": "Puri", "lat": 19.8135, "lng": 85.8312},
+    "patna": {"name": "Patna, Bihar", "state": "Bihar", "district": "Patna", "lat": 25.5941, "lng": 85.1376},
     "lucknow": {"name": "Lucknow, Uttar Pradesh", "state": "Uttar Pradesh", "district": "Lucknow", "lat": 26.8467, "lng": 80.9462},
+    "varanasi": {"name": "Varanasi, Uttar Pradesh", "state": "Uttar Pradesh", "district": "Varanasi", "lat": 25.3176, "lng": 82.9739},
+    "jaipur": {"name": "Jaipur, Rajasthan", "state": "Rajasthan", "district": "Jaipur", "lat": 26.9124, "lng": 75.7873},
+    "srinagar": {"name": "Srinagar, J&K", "state": "Jammu & Kashmir", "district": "Srinagar", "lat": 34.0837, "lng": 74.7973},
+    "shillong": {"name": "Shillong, Meghalaya", "state": "Meghalaya", "district": "East Khasi Hills", "lat": 25.5788, "lng": 91.8933},
+    "imphal": {"name": "Imphal, Manipur", "state": "Manipur", "district": "Imphal West", "lat": 24.8170, "lng": 93.9368},
+    "gangtok": {"name": "Gangtok, Sikkim", "state": "Sikkim", "district": "Gangtok", "lat": 27.3389, "lng": 88.6065},
 
-    "madhya pradesh": {"name": "Madhya Pradesh", "state": "Madhya Pradesh", "district": "Bhopal", "lat": 22.9734, "lng": 78.6569},
-    "rajasthan": {"name": "Rajasthan", "state": "Rajasthan", "district": "Jaipur", "lat": 27.0238, "lng": 74.2179},
-    "andhra pradesh": {"name": "Andhra Pradesh", "state": "Andhra Pradesh", "district": "Visakhapatnam", "lat": 15.9129, "lng": 79.7400},
-    "telangana": {"name": "Telangana", "state": "Telangana", "district": "Hyderabad", "lat": 18.1124, "lng": 79.0193},
-    "karnataka": {"name": "Karnataka", "state": "Karnataka", "district": "Bengaluru", "lat": 15.3173, "lng": 75.7139},
+    # Neighboring South Asian regions frequently reported in disaster news
+    "nepal": {"name": "Nepal", "state": "Nepal Region", "district": "Kathmandu Valley", "lat": 28.3949, "lng": 84.1240},
+    "kathmandu": {"name": "Kathmandu, Nepal", "state": "Nepal Region", "district": "Kathmandu", "lat": 27.7172, "lng": 85.3240},
+    "pokhara": {"name": "Pokhara, Nepal", "state": "Nepal Region", "district": "Kaski", "lat": 28.2096, "lng": 83.9856},
+    "bangladesh": {"name": "Bangladesh", "state": "Bangladesh Region", "district": "Dhaka", "lat": 23.6850, "lng": 90.3563},
+    "dhaka": {"name": "Dhaka, Bangladesh", "state": "Bangladesh Region", "district": "Dhaka", "lat": 23.8103, "lng": 90.4125},
+    "sri lanka": {"name": "Sri Lanka", "state": "Sri Lanka Region", "district": "Colombo", "lat": 7.8731, "lng": 80.7718},
+    "bay of bengal": {"name": "Bay of Bengal Coast", "state": "Coastal India", "district": "Bay of Bengal", "lat": 16.5000, "lng": 86.5000},
 }
 
 DEFAULT_INDIA_LOCATIONS_POOL = [
@@ -135,7 +144,7 @@ DEFAULT_INDIA_LOCATIONS_POOL = [
     {"name": "Kutch Coast, Gujarat", "state": "Gujarat", "district": "Kutch", "lat": 23.2420, "lng": 69.6669},
     {"name": "Puri Coast, Odisha", "state": "Odisha", "district": "Puri", "lat": 19.8135, "lng": 85.8312},
     {"name": "Mumbai Coast, Maharashtra", "state": "Maharashtra", "district": "Mumbai", "lat": 19.0760, "lng": 72.8777},
-    {"name": "Jammu Highway, J&K", "state": "Jammu & Kashmir", "district": "Jammu", "lat": 32.7266, "lng": 74.8570},
+    {"name": "Kashmir Valley, J&K", "state": "Jammu & Kashmir", "district": "Srinagar", "lat": 34.0837, "lng": 74.7973},
 ]
 
 def is_valid_english_article(art: dict) -> bool:
@@ -227,25 +236,31 @@ def extract_ner_location_and_geocode(text: str, fallback_idx: int = 0) -> dict:
     """NER Location Extraction & Geocoding for Indian news text."""
     lower_text = text.lower()
     
-    # Priority search for specific cities/districts first
-    for key, data in INDIAN_LOCATIONS.items():
+    # Priority search for specific cities/districts first (sorted longest key first)
+    sorted_keys = sorted(INDIAN_LOCATIONS.keys(), key=lambda k: len(k), reverse=True)
+    for key in sorted_keys:
         if re.search(r'\b' + re.escape(key) + r'\b', lower_text):
+            data = INDIAN_LOCATIONS[key]
+            jitter_lat = ((fallback_idx % 7) - 3) * 0.04
+            jitter_lng = (((fallback_idx * 3) % 7) - 3) * 0.04
             return {
                 "location": data["name"],
                 "state": data.get("state", "India"),
                 "district": data.get("district", data.get("state", "India")),
-                "latitude": data["lat"],
-                "longitude": data["lng"]
+                "latitude": round(data["lat"] + jitter_lat, 4),
+                "longitude": round(data["lng"] + jitter_lng, 4)
             }
             
     # Varied fallback from pools if location is general
     pool_item = DEFAULT_INDIA_LOCATIONS_POOL[fallback_idx % len(DEFAULT_INDIA_LOCATIONS_POOL)]
+    jitter_lat = ((fallback_idx % 5) - 2) * 0.05
+    jitter_lng = (((fallback_idx * 2) % 5) - 2) * 0.05
     return {
         "location": pool_item["name"],
         "state": pool_item["state"],
         "district": pool_item["district"],
-        "latitude": pool_item["lat"],
-        "longitude": pool_item["lng"]
+        "latitude": round(pool_item["lat"] + jitter_lat, 4),
+        "longitude": round(pool_item["lng"] + jitter_lng, 4)
     }
 
 def calculate_severity(disaster_type: str, confidence_score: float) -> str:

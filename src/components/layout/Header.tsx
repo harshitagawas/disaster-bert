@@ -1,5 +1,5 @@
 import React from 'react';
-import { RefreshCw, Radio, ShieldAlert, Clock } from 'lucide-react';
+import { RefreshCw, Radio, Clock } from 'lucide-react';
 
 interface HeaderProps {
   lastUpdated: Date | null;
@@ -23,14 +23,16 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="bg-white border-b border-slate-200/80 px-6 py-4 shadow-2xs">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         {/* Left Title Block */}
-        <div className="flex items-start space-x-3">
-          <div className="p-2 bg-blue-50 border border-blue-200 rounded-lg text-blue-600 shadow-xs mt-0.5">
-            <ShieldAlert className="w-6 h-6" />
-          </div>
+        <div className="flex items-start space-x-3.5">
+          <img
+            src="/logo.png"
+            alt="CrisisTrace Logo"
+            className="w-11 h-11 object-contain rounded-xl shrink-0 p-1 bg-white border border-slate-200/90 shadow-xs mt-0.5"
+          />
           <div>
             <div className="flex items-center space-x-2">
               <h1 className="text-xl font-extrabold text-slate-900 tracking-tight">
-                AI Disaster Intelligence Platform
+                CrisisTrace
               </h1>
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse mr-1.5"></span>

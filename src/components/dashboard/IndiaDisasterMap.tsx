@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { DisasterArticle } from '../../types/disaster';
 import { getCategoryBadgeStyle } from '../../utils/disasterClassifier';
+import { extractLocationAndGeocode } from '../../utils/locationGeocoder';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { MapPin, ShieldAlert, Eye, ExternalLink, Gauge, X, Sparkles, Layers } from 'lucide-react';
@@ -33,10 +34,10 @@ export const IndiaDisasterMap: React.FC<IndiaDisasterMapProps> = ({
         zoomControl: true,
       });
 
-      // Add CartoDB Voyager Light tiles for modern light aesthetics
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
+      // Standard OpenStreetMap tiles (100% free, no API key required)
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        subdomains: ['a', 'b', 'c'],
         maxZoom: 19,
       }).addTo(map);
 
@@ -88,10 +89,20 @@ export const IndiaDisasterMap: React.FC<IndiaDisasterMapProps> = ({
 
     const articlesToRender = articles.filter(a => isRealDisasterCategory(a.disasterType));
 
-    // Add Leaflet Markers for each article
+    // Add Leaflet Markers for each article at its exact mentioned state/district coordinates
     articlesToRender.forEach((art, idx) => {
-      const lat = art.latitude || (20.5937 + (idx % 5) * 0.5);
-      const lng = art.longitude || (78.9629 + Math.floor(idx / 5) * 0.5);
+      // Resolve exact state/district coordinates using spatial NER
+      let lat = art.latitude;
+      let lng = art.longitude;
+      let locName = art.location || art.state;
+
+      if (!lat || !lng || !locName || locName === 'India') {
+        const geo = extractLocationAndGeocode(art.title, art.description || '', idx);
+        lat = geo.latitude;
+        lng = geo.longitude;
+        locName = geo.location;
+      }
+
       const confPct = art.confidence_percent !== undefined
         ? art.confidence_percent
         : Math.round((art.confidenceScore || art.confidence || 0.85) * 100);
@@ -129,7 +140,7 @@ export const IndiaDisasterMap: React.FC<IndiaDisasterMapProps> = ({
 
       const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map);
 
-      // Light Popup Content
+      // Light Popup Content with exact state/district location
       const popupHtml = `
         <div class="p-1 font-sans text-xs max-w-[240px]">
           <div class="font-bold text-slate-900 text-sm mb-1 leading-snug">${art.title}</div>
@@ -137,15 +148,25 @@ export const IndiaDisasterMap: React.FC<IndiaDisasterMapProps> = ({
             <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-800">${art.disasterType}</span>
             <span class="font-mono text-emerald-700 font-bold text-[11px]">${confPct}% Conf</span>
           </div>
-          <div class="text-slate-600 text-[11px] mt-1 font-medium">📍 ${art.location || art.state || 'India'}</div>
+          <div class="text-slate-700 text-[11px] mt-1 font-semibold flex items-center gap-1">
+            <span>📍</span> <span>${locName}</span>
+          </div>
         </div>
       `;
       marker.bindPopup(popupHtml);
 
+      // Create enriched alert object for the inspector panel
+      const enrichedAlert: DisasterArticle = {
+        ...art,
+        location: locName,
+        latitude: lat,
+        longitude: lng,
+      };
+
       // Click Event Listener
       marker.on('click', () => {
-        setActiveAlert(art);
-        onSelectArticle(art);
+        setActiveAlert(enrichedAlert);
+        onSelectArticle(enrichedAlert);
       });
 
       markersRef.current.push(marker);

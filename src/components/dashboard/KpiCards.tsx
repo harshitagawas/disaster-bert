@@ -45,7 +45,7 @@ export const KpiCards: React.FC<KpiCardsProps> = ({ stats }) => {
       subtext: `${stats.total > 0 ? Math.round((stats.earthquake / stats.total) * 100) : 0}% of total feed`,
     },
     {
-      title: 'Other Disasters',
+      title: 'Other',
       count: stats.wildfire + stats.other,
       icon: HelpCircle,
       colorClass: 'text-slate-600',

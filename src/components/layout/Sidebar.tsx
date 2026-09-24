@@ -45,13 +45,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
     <aside className="w-64 bg-white border-r border-slate-200/80 flex flex-col justify-between shrink-0 h-screen sticky top-0 z-30 shadow-xs">
       <div>
         {/* Logo / Brand Header */}
-        <div className="p-4 border-b border-slate-100 flex items-center space-x-2.5">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold shadow-md shadow-blue-500/20">
-            AI
-          </div>
-          <div>
-            <h1 className="text-sm font-bold text-slate-900 leading-tight">India Disaster Intel</h1>
-            <p className="text-[10px] text-slate-500 font-mono">BERT AI Monitoring</p>
+        <div className="p-4 border-b border-slate-100 flex items-center space-x-3">
+          <img
+            src="/logo.png"
+            alt="CrisisTrace Logo"
+            className="w-9 h-9 object-contain rounded-lg shrink-0 drop-shadow-xs"
+          />
+          <div className="min-w-0">
+            <h1 className="text-sm font-extrabold text-slate-900 leading-tight tracking-tight truncate">CrisisTrace</h1>
+            <p className="text-[10px] text-slate-500 font-mono flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+              <span>BERT Monitoring</span>
+            </p>
           </div>
         </div>
 

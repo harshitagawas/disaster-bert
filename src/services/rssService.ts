@@ -1,5 +1,6 @@
 import { DisasterArticle } from '../types/disaster';
 import { classifyDisaster } from '../utils/disasterClassifier';
+import { extractLocationAndGeocode } from '../utils/locationGeocoder';
 
 const GDELT_API_URL = 'https://api.gdeltproject.org/api/v2/doc/doc?query=' + 
   encodeURIComponent('(flood OR earthquake OR cyclone OR hurricane OR wildfire OR landslide OR tsunami OR drought OR "heat wave" OR cloudburst OR disaster) India sourcelang:english') +
@@ -56,6 +57,9 @@ async function fetchGdeltFallback(): Promise<RssFetchResponse> {
     
     // Classify using rule-based fallback if backend offline
     const classification = classifyDisaster(title, title);
+    
+    // Extract exact State, District, and Geocoordinates via Spatial NER
+    const geo = extractLocationAndGeocode(title, title, index);
 
     return {
       id: item.url || `gdelt-fb-${index}-${Date.now()}`,
@@ -68,8 +72,16 @@ async function fetchGdeltFallback(): Promise<RssFetchResponse> {
       description: title,
       imageUrl,
       disasterType: classification.category,
+      disaster_type: classification.category,
       matchedKeywords: classification.matchedKeywords,
       confidenceScore: classification.confidence,
+      confidence_percent: Math.round(classification.confidence * 100),
+      location: geo.location,
+      state: geo.state,
+      district: geo.district,
+      latitude: geo.latitude,
+      longitude: geo.longitude,
+      severity: geo.severity,
     };
   });
 
@@ -98,11 +110,29 @@ export async function fetchDisasterFeed(): Promise<RssFetchResponse> {
         // Filter strict English titles
         const validItems = data.items.filter((item: any) => isStrictEnglishArticle(item.title || '', item.source || ''));
 
-        const articles: DisasterArticle[] = validItems.map((item: any) => {
+        const articles: DisasterArticle[] = validItems.map((item: any, idx: number) => {
           const bertClass = item.disasterType || item.disaster_type || 'General & Other Disaster';
           const confidence = item.confidenceScore !== undefined ? item.confidenceScore : (item.confidence !== undefined ? item.confidence : 0.85);
           const confidencePct = item.confidence_percent !== undefined ? item.confidence_percent : Math.round(confidence * 100);
           
+          // If backend didn't geocode or returned general coordinates, compute precise state/district geocoding
+          let lat = item.latitude;
+          let lng = item.longitude;
+          let loc = item.location;
+          let state = item.state;
+          let district = item.district;
+          let severity = item.severity;
+
+          if (!lat || !lng || !loc || loc === 'India') {
+            const geo = extractLocationAndGeocode(item.title || '', item.description || '', idx);
+            lat = lat || geo.latitude;
+            lng = lng || geo.longitude;
+            loc = loc && loc !== 'India' ? loc : geo.location;
+            state = state && state !== 'India' ? state : geo.state;
+            district = district || geo.district;
+            severity = severity || geo.severity;
+          }
+
           return {
             id: item.id,
             title: item.title,
@@ -118,12 +148,12 @@ export async function fetchDisasterFeed(): Promise<RssFetchResponse> {
             matchedKeywords: item.matchedKeywords || [`BERT AI (${confidencePct}%)`],
             confidenceScore: confidence,
             confidence_percent: confidencePct,
-            location: item.location,
-            state: item.state,
-            district: item.district,
-            latitude: item.latitude,
-            longitude: item.longitude,
-            severity: item.severity,
+            location: loc,
+            state: state,
+            district: district,
+            latitude: lat,
+            longitude: lng,
+            severity: severity,
             isDuplicate: item.isDuplicate
           };
         });
