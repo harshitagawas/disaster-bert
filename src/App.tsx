@@ -91,10 +91,10 @@ export const App: React.FC = () => {
                   <KpiCards stats={stats} />
 
                   {/* Row 1 Charts */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <DistributionChart stats={stats} />
-                    <SourceChart articles={articles} />
-                  </div>
+                  {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-6"> */}
+                    {/* <DistributionChart stats={stats} />
+                    <SourceChart articles={articles} /> */}
+                  {/* </div> */}
 
                   {/* Recent Articles Telemetry Table */}
                   <ArticlesTable
